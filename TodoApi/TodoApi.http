@@ -15,7 +15,7 @@ GET {{TodoApi_HostAddress}}/todoitems
 
 ###
 
-GET {{TodoApi_HostAddress}}/todoitems/2
+GET {{TodoApi_HostAddress}}/todoitems/1
 
 ###
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-DELETE {{TodoApi_HostAddress}}/todoitems/3
+DELETE {{TodoApi_HostAddress}}/todoitems/5
 
 ###
 
