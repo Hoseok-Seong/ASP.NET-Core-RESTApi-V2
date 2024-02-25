@@ -5,8 +5,9 @@ Content-Type: application/json
 
 {
   "name":"강아지 산책시키기",
-  "isComplete":true,
-  "category":0
+  "isComplete":false,
+  "category":0,
+  "days":2
 }
 
 
@@ -25,14 +26,15 @@ Content-Type: application/json
 
 {
   "id": 1,
-  "name": "강아지 산책시키기",
+  "name": "고향 방문",
   "isComplete": false,
-  "category":2
+  "category":0,
+  "days":10
 }
 
 ###
 
-DELETE {{TodoApi_HostAddress}}/todoitems/5
+DELETE {{TodoApi_HostAddress}}/todoitems/1
 
 ###
 
@@ -41,5 +43,9 @@ GET {{TodoApi_HostAddress}}/todoitems/complete
 ###
 
 POST {{TodoApi_HostAddress}}/todoitems/
+
+###
+
+GET {{TodoApi_HostAddress}}/todoitems/dueby?dueDateString=2024-03-06
 
 ###
