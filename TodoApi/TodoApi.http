@@ -5,7 +5,8 @@ Content-Type: application/json
 
 {
   "name":"강아지 산책시키기",
-  "isComplete":true
+  "isComplete":true,
+  "category":0
 }
 
 
@@ -25,7 +26,8 @@ Content-Type: application/json
 {
   "id": 1,
   "name": "강아지 산책시키기",
-  "isComplete": false
+  "isComplete": false,
+  "category":2
 }
 
 ###
@@ -35,5 +37,9 @@ DELETE {{TodoApi_HostAddress}}/todoitems/5
 ###
 
 GET {{TodoApi_HostAddress}}/todoitems/complete
+
+###
+
+POST {{TodoApi_HostAddress}}/todoitems/
 
 ###

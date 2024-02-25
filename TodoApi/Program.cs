@@ -1,8 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using TodoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 var app = builder.Build();
 
 var todoItems = app.MapGroup("/todoitems");
@@ -18,7 +23,16 @@ app.Run();
 
 static async Task<IResult> GetAllTodos(TodoDb db)
 {
-    return TypedResults.Ok(await db.Todos.ToArrayAsync());
+    var todos = await db.Todos.ToArrayAsync();
+    var result = todos.Select(todo => new
+    {
+        todo.Id,
+        todo.Name,
+        todo.IsComplete,
+        Category = todo.Category.ToString()
+    });
+
+    return TypedResults.Ok(result);
 }
 
 static async Task<IResult> GetCompleteTodos(TodoDb db)
@@ -50,6 +64,7 @@ static async Task<IResult> UpdateTodo(int id, Todo inputTodo, TodoDb db)
 
     todo.Name = inputTodo.Name;
     todo.IsComplete = inputTodo.IsComplete;
+    todo.Category = inputTodo.Category;
 
     await db.SaveChangesAsync();
 
